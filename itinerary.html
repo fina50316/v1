@@ -1,0 +1,221 @@
+<!doctype html>
+<!--itinerary.html start-->
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>行程規劃｜KIWI TRAILS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/itinerary.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#"
+        ><span class="brand-mark">✦</span
+        ><span>KIWI <b>TRAILS</b><small>NEW ZEALAND TRAVEL</small></span></a
+      >
+      <nav class="top-nav">
+        <a href="#">首頁</a><a href="#">景點</a><a href="#">城市</a
+        ><a class="active" href="#">行程規劃</a><a href="#">收藏</a>
+      </nav>
+      <button class="user-button" aria-label="會員">👤</button>
+    </header>
+
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="side-heading">
+          <span>我的行程</span
+          ><button id="newTripBtn" class="icon-add" title="新增行程">＋</button>
+        </div>
+        <div id="tripList" class="trip-list"></div>
+        <div class="side-bottom"><span>☘</span> 讓每一段旅程，都成為故事。</div>
+      </aside>
+
+      <section class="planner">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">PLAN YOUR ADVENTURE</div>
+            <h1>行程規劃</h1>
+            <p>把收藏的景點排進旅程，開始探索紐西蘭。</p>
+          </div>
+          <button id="editTripBtn" class="button button-outline">
+            ✎ 編輯行程
+          </button>
+        </div>
+        <section class="trip-summary">
+          <div class="trip-summary-main">
+            <span class="summary-icon">✈</span>
+            <div>
+              <h2 id="currentTripName">我的紐西蘭之旅</h2>
+              <p id="tripMeta">選擇日期，安排你的每日旅程</p>
+            </div>
+          </div>
+          <div class="summary-days">
+            <strong id="tripDayCount">5</strong><span>天旅程</span>
+          </div>
+        </section>
+
+        <div class="day-toolbar">
+          <div>
+            <h3>每日行程</h3>
+            <span id="dayHint">選擇日期查看當天安排</span>
+          </div>
+          <button id="addDayBtn" class="button button-light">
+            ＋ 增加一天
+          </button>
+        </div>
+        <div id="dayTabs" class="day-tabs"></div>
+
+        <div class="selected-day-head">
+          <div>
+            <span class="day-kicker" id="selectedDayKicker">DAY 01</span>
+            <h2 id="selectedDateTitle">第一天</h2>
+          </div>
+          <button id="addAttractionBtn" class="button button-primary">
+            ＋ 加入收藏景點
+          </button>
+        </div>
+
+        <div id="attractionList" class="attraction-list"></div>
+        <div id="emptyDay" class="empty-state hidden">
+          <div class="empty-illustration">🏞️</div>
+          <h3>這一天還沒有安排景點</h3>
+          <p>從你的收藏中加入景點，打造專屬行程。</p>
+          <button class="button button-primary" id="emptyAddBtn">
+            ＋ 選擇收藏景點
+          </button>
+        </div>
+
+        <div class="route-note">
+          <span>ⓘ</span> 拖曳景點卡片或使用上下箭頭，即可調整參觀順序。
+        </div>
+      </section>
+
+      <aside class="map-panel">
+        <div class="map-top">
+          <div>
+            <span class="eyebrow">YOUR ROUTE</span>
+            <h3>行程地圖</h3>
+          </div>
+          <span class="map-live"><i></i> 地圖同步</span>
+        </div>
+        <div class="map-controls">
+          <button id="routeBtn" class="button button-primary route-button">
+            ⌁ 顯示行程路線</button
+          ><button id="fitMapBtn" class="map-icon-btn" title="顯示全部景點">
+            ⛶
+          </button>
+        </div>
+        <div id="map"></div>
+        <div class="map-legend">
+          <span><i class="legend-dot"></i> 行程景點</span
+          ><span><i class="legend-line"></i> 景點路線</span>
+        </div>
+        <div class="map-footer">
+          <span id="mapCount">目前 0 個景點</span><span>© OpenStreetMap</span>
+        </div>
+      </aside>
+    </main>
+
+    <!-- 新增 / 編輯行程 -->
+    <dialog id="tripDialog" class="modal">
+      <form id="tripForm" method="dialog">
+        <div class="modal-head">
+          <div>
+            <span class="eyebrow">TRIP SETTINGS</span>
+            <h2 id="tripDialogTitle">新增行程</h2>
+          </div>
+          <button type="button" class="close-btn" data-close="tripDialog">
+            ×
+          </button>
+        </div>
+        <label
+          >行程名稱<input
+            id="tripNameInput"
+            type="text"
+            maxlength="40"
+            placeholder="例如：南島自駕之旅"
+            required
+        /></label>
+        <div class="form-grid">
+          <label
+            >出發日期<input id="tripDateInput" type="date" required /></label
+          ><label
+            >旅遊天數<input
+              id="tripDaysInput"
+              type="number"
+              min="1"
+              max="30"
+              value="5"
+              required
+          /></label>
+        </div>
+        <p class="form-help">
+          修改天數時，系統會自動新增或移除每日行程；若移除的日期已有景點，請先確認。
+        </p>
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="button button-outline"
+            data-close="tripDialog"
+          >
+            取消</button
+          ><button class="button button-primary" type="submit">儲存行程</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- 從收藏加入景點 -->
+    <dialog id="favoriteDialog" class="modal favorite-modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">MY FAVORITES</span>
+          <h2>加入收藏景點</h2>
+          <p>選擇要加入這一天的景點。</p>
+        </div>
+        <button type="button" class="close-btn" data-close="favoriteDialog">
+          ×
+        </button>
+      </div>
+      <div class="favorite-tools">
+        <input
+          id="favoriteSearch"
+          type="search"
+          placeholder="搜尋景點或城市…"
+        /><select id="favoriteCity">
+          <option value="">全部城市</option>
+        </select>
+      </div>
+      <div id="favoriteChoices" class="favorite-choices"></div>
+      <div class="modal-actions">
+        <button
+          type="button"
+          class="button button-outline"
+          data-close="favoriteDialog"
+        >
+          取消</button
+        ><button
+          type="button"
+          id="confirmFavoritesBtn"
+          class="button button-primary"
+        >
+          加入選取景點
+        </button>
+      </div>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+<!--itinerary.html end-->
+</html>
