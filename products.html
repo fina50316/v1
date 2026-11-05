@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>探索景點 | KIWI TRAILS</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/products.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- 導覽列 Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto mx-lg-auto py-0">
+				<a href="index.html" class="nav-item nav-link">首頁</a>
+				<div class="nav-item dropdown">
+                    <a href="attractions.html" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">城市</a>
+                    <div class="dropdown-menu m-0">
+						<h6 style="margin: 10px 13px 3px;">南島</h6>
+                        <a href="attractions.html?city=Queenstown" class="dropdown-item">皇后鎮（Queenstown）</a>
+                        <a href="attractions.html?city=Christchurch" class="dropdown-item">基督城（Christchurch）</a>
+						<a href="attractions.html?city=Dunedin" class="dropdown-item">但尼丁（Dunedin）</a>
+                        <a href="attractions.html?city=TeAnau" class="dropdown-item">蒂阿瑙（Te Anau）</a>
+						<a href="attractions.html?city=Akaroa" class="dropdown-item">阿卡羅阿（Akaroa）</a>
+						<h6 style="margin: 10px 13px 3px;">北島</h6>
+                        <a href="attractions.html?city=Auckland" class="dropdown-item">奧克蘭（Auckland）</a>
+                        <a href="attractions.html?city=Wellington" class="dropdown-item">威靈頓（Wellington）</a>
+						<a href="attractions.html?city=Rotorua" class="dropdown-item">羅吐魯阿（Rotorua）</a>
+                        <a href="attractions.html?city=Taupo" class="dropdown-item">陶波（Taupo）</a>
+						<a href="attractions.html?city=Matamata" class="dropdown-item">瑪塔瑪塔（Matamata）</a>
+                    </div>
+              </div>
+				<div class="nav-item dropdown">
+    <a href="products.html"
+       class="nav-link dropdown-toggle"
+       data-bs-toggle="dropdown">
+        旅遊商品
+    </a>
+
+    <div class="dropdown-menu m-0">
+        <a href="products.html?category=city-tour"
+           class="dropdown-item">城市觀光與導覽</a>
+
+        <a href="products.html?category=water-activities"
+           class="dropdown-item">遊船與水上活動</a>
+
+        <a href="products.html?category=adventure"
+           class="dropdown-item">極限運動與冒險</a>
+
+        <a href="products.html?category=nature"
+           class="dropdown-item">自然生態與動物</a>
+
+        <a href="products.html?category=culture"
+           class="dropdown-item">文化歷史與博物館</a>
+
+        <a href="products.html?category=day-tour"
+           class="dropdown-item">一日遊與跨城市行程</a>
+
+        <a href="products.html?category=transport"
+           class="dropdown-item">交通票券</a>
+    </div>
+</div>
+                <a href="itinerary.html" class="nav-item nav-link">行程規劃</a>
+                <a href="news.html" class="nav-item nav-link">最新消息</a>
+                <div class="nav-item dropdown">
+                    <a href="services.html" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">旅遊服務</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="#" class="dropdown-item">入出境須知</a>
+                        <a href="#" class="dropdown-item">實用資訊</a>
+                        <a href="#" class="dropdown-item">緊急情況</a>
+                    </div>
+               </div>
+				<a href="message.html" class="nav-item nav-link">留言板</a>
+				<a href="member.html" class="nav-item nav-link">會員</a>
+                <a href="car.html" class="nav-item nav-link">購物車</a>
+          </div>
+        </div>
+    </nav>
+    <!-- 導覽列 End -->
+
+    <!-- 橫幅 Banner -->
+    <div class="container-fluid py-5 attraction-banner">
+      <div class="container py-5">
+        <div class="row justify-content-start">
+          <div class="col-lg-9 text-center text-lg-start">
+            <h6 class="display-1 text-white mb-4">探索景點</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 橫幅 Banner -->
+
+    <!-- 商品頁面標題 -->
+    <section class="product-header">
+      <div class="container text-center">
+        <h1 id="productTitle">城市觀光與導覽</h1>
+      </div>
+    </section>
+
+    <!-- 商品分類 -->
+    <section class="product-section">
+      <div class="container">
+        <!-- 商品篩選 -->
+        <div class="product-filter">
+          <select id="cityFilter">
+            <option value="all">全部城市</option>
+            <option value="Queenstown">皇后鎮</option>
+            <option value="Christchurch">基督城</option>
+            <option value="Dunedin">但尼丁</option>
+            <option value="TeAnau">蒂阿瑙</option>
+            <option value="Akaroa">阿卡羅阿</option>
+            <option value="Auckland">奧克蘭</option>
+            <option value="Wellington">威靈頓</option>
+            <option value="Rotorua">羅吐魯阿</option>
+            <option value="Taupo">陶波</option>
+            <option value="Matamata">瑪塔瑪塔</option>
+          </select>
+
+          <select id="categoryFilter">
+            <option value="all">全部分類</option>
+            <option value="city-tour">城市觀光與導覽</option>
+            <option value="water-activities">遊船與水上活動</option>
+            <option value="adventure">極限運動與冒險</option>
+            <option value="nature">自然生態與動物</option>
+            <option value="culture">文化歷史與博物館</option>
+            <option value="day-tour">一日遊與跨城市行程</option>
+            <option value="transport">交通票券</option>
+          </select>
+        </div>
+
+        <!-- 商品列表 -->
+        <div class="row g-4" id="productList">
+          <!-- 商品卡片範例 -->
+          <div
+            class="col-lg-3 col-md-6 product-item"
+            data-category="city-tour"
+            data-city="Queenstown"
+          >
+            <div class="product-card">
+              <img src="images/products/shotover-jet.jpg" alt="Shotover Jet" />
+              <div class="product-info">
+                <h5>魔戒生態之旅 - 格勒諾奇半日遊</h5>
+                <p>皇后鎮（Queenstown）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer-section text-secondary">
+      <div class="container">
+        <div class="row gx-5">
+          <div class="col-lg-8 col-md-6">
+            <div class="row gx-5">
+              <div class="col-lg-4 col-md-12 pt-3 mb-3">
+                <h4 class="text-primary text-uppercase mb-4">聯絡方式</h4>
+                <div class="d-flex mb-2">
+                  <i class="bi bi-geo-alt text-primary me-2"></i>
+                  <p class="mb-0">720臺南市官田區二鎮里工業路40號</p>
+                </div>
+                <div class="d-flex mb-2">
+                  <i class="bi bi-envelope-open text-primary me-2"></i>
+                  <p class="mb-0">abc123@gmail.com</p>
+                </div>
+                <div class="d-flex mb-2">
+                  <i class="bi bi-telephone text-primary me-2"></i>
+                  <p class="mb-0">06-6985945</p>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12 pt-3 mb-3">
+                <h4 class="text-primary text-uppercase mb-4">快速連結</h4>
+                <div class="footer-links">
+                  <a href="#home">首頁</a>
+                  <a href="#attractions">探索景點</a>
+                  <a href="#products">旅遊商品</a>
+                  <a href="#itinerary">行程規劃</a>
+                  <a href="#news">最新消息</a>
+                  <a href="#services">旅遊服務</a>
+                  <a href="#message">留言板</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a
+      href="#"
+      class="btn btn-primary border-inner py-3 fs-4 back-to-top"
+      onclick="fastScrollTop(event)"
+      ><i class="bi bi-arrow-up"></i
+    ></a>
+
+    <!-- JavaScript -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/products.js"></script>
+	  <script src="js/navbar.js"></script>
+
+    <!-- 收藏按鈕 -->
+    <script>
+      document.querySelectorAll(".favorite-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const icon = this.querySelector("i");
+
+          icon.classList.toggle("far");
+          icon.classList.toggle("fas");
+
+          this.classList.toggle("active");
+        });
+      });
+
+      // 取得網址中的城市參數
+      const params = new URLSearchParams(window.location.search);
+      const selectedCity = params.get("city");
+
+      // 取得所有景點卡片
+      const attractionItems = document.querySelectorAll(".attraction-item");
+
+      // 根據城市顯示景點
+      if (selectedCity) {
+        attractionItems.forEach((item) => {
+          if (item.dataset.city === selectedCity) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
