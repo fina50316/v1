@@ -1,0 +1,329 @@
+
+/* =========================
+   景點頁面橫幅
+========================= */
+
+.attraction-banner {
+    position: relative;
+    height: 250px;
+    background:
+        linear-gradient(
+            to right,
+            rgba(24, 54, 40, 0.50),
+            rgba(24, 54, 40, 0.08)
+        ),
+        url("../img/Scity-Queenstown.webp") center 63% no-repeat;
+    background-size: cover;
+    display: flex;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.banner-content h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.banner-content p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+
+/* =========================
+   景點列表區塊
+========================= */
+
+.attraction-list-section {
+    padding: 65px 0 100px;
+    background: transparent;
+}
+
+.attraction-list-section .section-title {
+    margin-bottom: 40px;
+}
+
+/* 移除景點列表標題裝飾線 */
+.attraction-list-section .section-title::before,
+.attraction-list-section .section-title::after,
+.attraction-list-section .section-title h2::before,
+.attraction-list-section .section-title h2::after {
+    display: none !important;
+    content: none !important;
+}
+
+
+/* =========================
+   景點卡片
+========================= */
+
+.attraction-item {
+    margin-bottom: 12px;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.attraction-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+}
+
+/* 圖片容器 */
+.attraction-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* 圖片 */
+.attraction-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* 滑鼠移入整張卡片，只有圖片放大 */
+.attraction-list-section .attraction-item:hover .attraction-image {
+    transform: none !important;
+}
+
+.attraction-list-section .attraction-item:hover .attraction-image img {
+    transform: scale(1.05) !important;
+}
+
+/* 景點名稱固定 */
+.attraction-overlay h5 {
+    transform: none !important;
+    transition: none !important;
+}
+
+/* 愛心固定 */
+.favorite-btn,
+.favorite-btn i {
+    transform: none !important;
+}
+
+/* 移除卡片偽元素裝飾 */
+.attraction-item::before,
+.attraction-item::after,
+.attraction-card::before,
+.attraction-card::after,
+.attraction-image::before,
+.attraction-image::after {
+    content: none !important;
+    display: none !important;
+}
+
+
+/* =========================
+   收藏愛心
+========================= */
+
+.favorite-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent !important;
+
+    cursor: pointer;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* 空心愛心 */
+.favorite-btn i {
+    color: #FFFFFF;
+    font-size: 23px;
+    line-height: 1;
+    transform: none !important;
+    transition: color 0.3s ease;
+}
+
+/* 收藏後變紅色 */
+.favorite-btn.active i {
+    color: #E85B5B;
+}
+
+/* 滑鼠移入愛心時不放大 */
+.favorite-btn:hover,
+.favorite-btn:hover i {
+    transform: none !important;
+    font-size: 23px;
+}
+
+
+/* =========================
+   景點名稱
+========================= */
+
+.attraction-overlay {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    padding: 15px;
+
+    display: flex;
+    align-items: flex-end;
+
+    background: transparent;
+    pointer-events: none;
+}
+
+.attraction-overlay h5 {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.8);
+
+    transform: none !important;
+    transition: none !important;
+}
+
+/* 滑鼠移入時文字不放大 */
+.attraction-card:hover .attraction-overlay h5 {
+    transform: none !important;
+}
+
+
+/* =========================
+   RWD 響應式設計
+========================= */
+
+@media (max-width: 768px) {
+
+    .attraction-list-section {
+        padding: 45px 0 65px;
+    }
+
+    .attraction-image {
+        height: 190px;
+    }
+
+    .attraction-overlay h5 {
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .attraction-image {
+        height: 220px;
+    }
+
+}
+
+/* ===== 景點列表頁專用 hover 效果 ===== */
+
+/* 卡片不移動 */
+.attraction-list-section .attraction-item:hover,
+.attraction-list-section .attraction-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* 圖片容器不放大 */
+.attraction-list-section .attraction-card:hover .attraction-image {
+    transform: none !important;
+}
+
+/* 只有圖片放大 */
+.attraction-list-section .attraction-card:hover .attraction-image img {
+    transform: scale(1.05) !important;
+}
+
+/* 景點名稱不放大 */
+.attraction-list-section .attraction-card:hover .attraction-overlay,
+.attraction-list-section .attraction-card:hover .attraction-overlay h5 {
+    transform: none !important;
+}
+
+/* 愛心不放大 */
+.attraction-list-section .attraction-card:hover .favorite-btn,
+.attraction-list-section .attraction-card:hover .favorite-btn i {
+    transform: none !important;
+}
+
+/* ===== 景點頁導覽列修正 ===== */
+
+/* 導覽列顯示在橫幅上方 */
+nav.navbar {
+    position: relative;
+    z-index: 1050;
+}
+
+/* 點擊或展開後，文字維持深綠色 */
+nav.navbar.navbar-dark .navbar-nav .nav-link:focus,
+nav.navbar.navbar-dark .navbar-nav .nav-link.show {
+    color: var(--Dark_green) !important;
+}
+
+/* 下拉選單 */
+nav.navbar .dropdown-menu {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border_color);
+    z-index: 1060;
+}
+
+/* 下拉選單文字 */
+nav.navbar .dropdown-item {
+    color: var(--content_color);
+}
+
+nav.navbar .dropdown-item:hover,
+nav.navbar .dropdown-item:focus {
+    color: var(--Dark_green);
+    background-color: var(--bg_green);
+}
+
+/* 電腦版滑鼠移入展開 */
+@media (min-width: 992px) {
+    nav.navbar .dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+}
