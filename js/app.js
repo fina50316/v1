@@ -1,6 +1,6 @@
 // KIWI TRAILS 行程規劃：前端展示版（資料暫存於 localStorage）
 // 正式上線時，請將 load/save 部分改接 PHP + MySQL API。
-//app.js start
+
 const FAVORITES = [
   {id:1,name:"Skyline Queenstown",city:"Queenstown",description:"搭乘纜車欣賞皇后鎮與瓦卡蒂普湖景色",lat:-45.0312,lng:168.6626,image:"https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=500"},
   {id:2,name:"Queenstown Gardens",city:"Queenstown",description:"湖畔散步與欣賞群山風景",lat:-45.0347,lng:168.6668,image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500"},
@@ -208,5 +208,3 @@ $("attractionList").addEventListener("drop",e=>{
 persist();render();
 
 window.addEventListener("resize", () => map.invalidateSize());
-
-//app.js end

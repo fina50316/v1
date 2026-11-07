@@ -68,12 +68,15 @@
 /* =========================
    景點卡片
 ========================= */
-
 .attraction-item {
-    margin-bottom: 12px;
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg_green);
+    border: 1px solid var(--border_color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .attraction-card {
@@ -321,9 +324,3 @@ nav.navbar .dropdown-item:focus {
     background-color: var(--bg_green);
 }
 
-/* 電腦版滑鼠移入展開 */
-@media (min-width: 992px) {
-    nav.navbar .dropdown:hover > .dropdown-menu {
-        display: block;
-    }
-}

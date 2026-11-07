@@ -1,5 +1,4 @@
 <!doctype html>
-<!--itinerary.html start-->
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
@@ -15,21 +14,80 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/itinerary.css" />
   </head>
+
   <body>
-    <header class="topbar">
-      <a class="brand" href="#"
-        ><span class="brand-mark">✦</span
-        ><span>KIWI <b>TRAILS</b><small>NEW ZEALAND TRAVEL</small></span></a
-      >
-      <nav class="top-nav">
-        <a href="#">首頁</a><a href="#">景點</a><a href="#">城市</a
-        ><a class="active" href="#">行程規劃</a><a href="#">收藏</a>
-      </nav>
-      <button class="user-button" aria-label="會員">👤</button>
-    </header>
+    <!-- 導覽列 Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto mx-lg-auto py-0">
+				<a href="index.html" class="nav-item nav-link active">首頁</a>
+				<div class="nav-item dropdown">
+                    <a href="attractions.html" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">城市</a>
+                    <div class="dropdown-menu m-0">
+						<h6 style="margin: 10px 13px 3px;">南島</h6>
+                        <a href="attractions.html?city=Queenstown" class="dropdown-item">皇后鎮（Queenstown）</a>
+                        <a href="attractions.html?city=Christchurch" class="dropdown-item">基督城（Christchurch）</a>
+						<a href="attractions.html?city=Dunedin" class="dropdown-item">但尼丁（Dunedin）</a>
+                        <a href="attractions.html?city=TeAnau" class="dropdown-item">蒂阿瑙（Te Anau）</a>
+						<a href="attractions.html?city=Akaroa" class="dropdown-item">阿卡羅阿（Akaroa）</a>
+						<h6 style="margin: 10px 13px 3px;">北島</h6>
+                        <a href="attractions.html?city=Auckland" class="dropdown-item">奧克蘭（Auckland）</a>
+                        <a href="attractions.html?city=Wellington" class="dropdown-item">威靈頓（Wellington）</a>
+						<a href="attractions.html?city=Rotorua" class="dropdown-item">羅吐魯阿（Rotorua）</a>
+                        <a href="attractions.html?city=Taupo" class="dropdown-item">陶波（Taupo）</a>
+						<a href="attractions.html?city=Matamata" class="dropdown-item">瑪塔瑪塔（Matamata）</a>
+                    </div>
+                </div>
+				<div class="nav-item dropdown">
+                    <a href="products.html"
+                    class="nav-link dropdown-toggle"
+                    data-bs-toggle="dropdown">
+                        旅遊商品
+                    </a>
+                    <div class="dropdown-menu m-0">
+                        <a href="products.html?category=city-tour"
+                        class="dropdown-item">城市觀光與導覽</a>
+
+                        <a href="products.html?category=water-activities"
+                        class="dropdown-item">遊船與水上活動</a>
+
+                        <a href="products.html?category=adventure"
+                        class="dropdown-item">極限運動與冒險</a>
+
+                        <a href="products.html?category=nature"
+                        class="dropdown-item">自然生態與動物</a>
+
+                        <a href="products.html?category=culture"
+                        class="dropdown-item">文化歷史與博物館</a>
+
+                        <a href="products.html?category=day-tour"
+                        class="dropdown-item">一日遊與跨城市行程</a>
+
+                        <a href="products.html?category=transport"
+                        class="dropdown-item">交通票券</a>
+                    </div>
+                </div>
+                <a href="itinerary.html" class="nav-item nav-link">行程規劃</a>
+                <a href="news.html" class="nav-item nav-link">最新消息</a>
+                <div class="nav-item dropdown">
+                    <a href="services.html" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">旅遊服務</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="services.html#entry" class="dropdown-item">入出境須知</a>
+                        <a href="services.html#information" class="dropdown-item">實用資訊</a>
+                        <a href="services.html#emergency" class="dropdown-item">緊急情況</a>
+                    </div>
+               </div>
+				<a href="message.html" class="nav-item nav-link">留言板</a>
+				<a href="member.html" class="nav-item nav-link">會員</a>
+                <a href="car.html" class="nav-item nav-link">購物車</a>
+          </div>
+        </div>
+    </nav>
+    <!-- 導覽列 End -->
 
     <main class="app-shell">
       <aside class="sidebar">
@@ -214,8 +272,12 @@
       </div>
     </dialog>
 
+    <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+
   </body>
-<!--itinerary.html end-->
 </html>

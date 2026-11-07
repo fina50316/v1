@@ -1,5 +1,3 @@
-//navbar.js start
-
 // 取得目前網頁名稱
 const currentPage = window.location.pathname
     .split("/")
@@ -12,9 +10,12 @@ const navItems = document.querySelectorAll(
 
 // 先移除所有 active
 navItems.forEach(item => {
+
     item.classList.remove("active");
 
-    const link = item.querySelector(":scope > .nav-link");
+    const link = item.matches(".nav-link")
+        ? item
+        : item.querySelector(":scope > .nav-link");
 
     if (link) {
         link.classList.remove("active");
@@ -36,8 +37,5 @@ navItems.forEach(item => {
 
     if (linkPage === currentPage) {
         link.classList.add("active");
-        item.classList.add("active");
     }
 });
-
-//navbar.js end

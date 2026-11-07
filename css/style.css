@@ -1,4 +1,3 @@
-/*style.css start*/
 /********** Template CSS **********/
 :root {    
     --primary: #F5C84B;       /* 金黃色：主要按鈕、強調色 */
@@ -285,38 +284,6 @@ h6,
 }
 
 .team-item:hover .team-overlay {
-    opacity: 1;
-}
-
-.testimonial-carousel .owl-dots {
-    height: 45px;
-    margin-top: 30px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.testimonial-carousel .owl-dot {
-    position: relative;
-    display: inline-block;
-    margin: 0 2px;
-    width: 10px;
-    height: 25px;
-    background: #DDDDDD;
-    transition: .5s;
-}
-
-.testimonial-carousel .owl-dot.active {
-    height: 45px;
-    background: var(--kiwi);
-}
-
-.testimonial-carousel .owl-item .testimonial-item {
-    opacity: .1;
-    transition: .5s;
-}
-
-.testimonial-carousel .owl-item.center .testimonial-item {
     opacity: 1;
 }
 
@@ -993,4 +960,13 @@ h6,
     }
 }
 
-/*style.css end*/
+/* 所有頁面的導覽列下拉選單：滑鼠移入時維持文字顏色 */
+.navbar .nav-item.dropdown:hover > .nav-link,
+.navbar .nav-item.dropdown:focus-within > .nav-link {
+    color: #4F8F4A !important;
+}
+
+/* 下拉選單展開時，主選單文字不變白色 */
+.navbar .nav-link.show {
+    color: #4F8F4A !important;
+}
