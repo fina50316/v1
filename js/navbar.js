@@ -1,41 +1,13 @@
-// 取得目前網頁名稱
-const currentPage = window.location.pathname
-    .split("/")
-    .pop();
-
-// 找出導覽列所有項目
-const navItems = document.querySelectorAll(
-    ".navbar-nav > .nav-link, .navbar-nav > .dropdown"
-);
-
-// 先移除所有 active
-navItems.forEach(item => {
-
-    item.classList.remove("active");
-
-    const link = item.matches(".nav-link")
-        ? item
-        : item.querySelector(":scope > .nav-link");
-
-    if (link) {
-        link.classList.remove("active");
-    }
-});
-
-// 判斷目前所在頁面
-navItems.forEach(item => {
-
-    const link = item.matches(".nav-link")
-        ? item
-        : item.querySelector(":scope > .nav-link");
-
+// 全站導覽列：比對目前頁面，並高亮下拉選單所屬主項目。
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPage = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  document.querySelectorAll(".navbar-nav > a.nav-link, .navbar-nav > .dropdown").forEach(item => {
+    const link = item.matches("a.nav-link") ? item : item.querySelector(":scope > a.nav-link");
     if (!link) return;
-
-    const linkPage = new URL(link.href).pathname
-        .split("/")
-        .pop();
-
-    if (linkPage === currentPage) {
-        link.classList.add("active");
-    }
+    link.classList.remove("active");
+    const href = link.getAttribute("href");
+    if (!href || href === "#") return;
+    const targetPage = new URL(href, location.href).pathname.split("/").pop().toLowerCase();
+    if (targetPage === currentPage) link.classList.add("active");
+  });
 });

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>car｜KIWI TRAILS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet"><link href="css/style.css" rel="stylesheet"><link href="css/pages.css" rel="stylesheet"></head>
+<body><nav class="navbar navbar-expand-lg bg-white navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+<div class="container-fluid"><a class="navbar-brand d-lg-none fw-bold" href="index.html">KIWI TRAILS</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="切換導覽列"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarCollapse"><div class="navbar-nav ms-auto mx-lg-auto py-0">
+<a href="index.html" class="nav-item nav-link">首頁</a>
+<div class="nav-item dropdown"><a href="attractions.html" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">城市</a><div class="dropdown-menu m-0">
+<h6 class="dropdown-heading">南島</h6>
+<a href="attractions.html?city=Queenstown" class="dropdown-item">皇后鎮（Queenstown）</a><a href="attractions.html?city=Christchurch" class="dropdown-item">基督城（Christchurch）</a><a href="attractions.html?city=Dunedin" class="dropdown-item">但尼丁（Dunedin）</a><a href="attractions.html?city=TeAnau" class="dropdown-item">蒂阿瑙（Te Anau）</a><a href="attractions.html?city=Akaroa" class="dropdown-item">阿卡羅阿（Akaroa）</a>
+<h6 class="dropdown-heading">北島</h6>
+<a href="attractions.html?city=Auckland" class="dropdown-item">奧克蘭（Auckland）</a><a href="attractions.html?city=Wellington" class="dropdown-item">威靈頓（Wellington）</a><a href="attractions.html?city=Rotorua" class="dropdown-item">羅吐魯阿（Rotorua）</a><a href="attractions.html?city=Taupo" class="dropdown-item">陶波（Taupo）</a><a href="attractions.html?city=Matamata" class="dropdown-item">瑪塔瑪塔（Matamata）</a></div></div>
+<div class="nav-item dropdown"><a href="products.html" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">旅遊商品</a><div class="dropdown-menu m-0">
+<a href="products.html?category=city-tour" class="dropdown-item">城市觀光與導覽</a><a href="products.html?category=water-activities" class="dropdown-item">遊船與水上活動</a><a href="products.html?category=adventure" class="dropdown-item">極限運動與冒險</a><a href="products.html?category=nature" class="dropdown-item">自然生態與動物</a><a href="products.html?category=culture" class="dropdown-item">文化歷史與博物館</a><a href="products.html?category=day-tour" class="dropdown-item">一日遊與跨城市行程</a><a href="products.html?category=transport" class="dropdown-item">交通票券</a></div></div>
+<a href="itinerary.html" class="nav-item nav-link">行程規劃</a><a href="news.html" class="nav-item nav-link">最新消息</a>
+<div class="nav-item dropdown"><a href="services.html" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">旅遊服務</a><div class="dropdown-menu m-0"><a href="services.html#entry" class="dropdown-item">入出境須知</a><a href="services.html#information" class="dropdown-item">實用資訊</a><a href="services.html#emergency" class="dropdown-item">緊急情況</a></div></div>
+<a href="message.html" class="nav-item nav-link">留言板</a><a href="member.html" class="nav-item nav-link">會員</a><a href="car.html" class="nav-item nav-link">購物車</a>
+</div></div></div></nav><main><section class="page-banner"><div class="container"><p class="eyebrow">YOUR CART</p><h1>購物車</h1><p>檢查已加入的旅遊商品與體驗日期。</p></div></section>
+<section class="page-section"><div class="container"><div class="cart-layout"><div class="content-card cart-items"><div class="cart-heading"><h2>購物清單</h2><button id="clearCartBtn" class="text-button" type="button">清空購物車</button></div><div id="cartList" class="cart-list"><p class="empty-state">購物車目前是空的，先去探索旅遊商品吧！</p></div></div>
+<aside class="content-card cart-summary"><h3>訂單摘要</h3><div class="summary-line"><span>商品小計</span><strong id="cartSubtotal">NT$ 0</strong></div><div class="summary-line"><span>服務費</span><strong>NT$ 0</strong></div><hr><div class="summary-line total"><span>總計</span><strong id="cartTotal">NT$ 0</strong></div><a href="products.html" class="btn btn-primary w-100 py-3">繼續探索商品</a><button id="demoCheckoutBtn" class="btn btn-outline-success w-100 py-3 mt-2" type="button">建立展示訂單</button><p class="small-note">專題展示版不會進行真實付款或實際預約。</p><p id="cartFeedback" class="form-feedback" role="status"></p></aside></div></div></section></main><footer class="site-footer"><div class="container"><div class="row gy-4">
+<div class="col-md-6"><h4>KIWI TRAILS</h4><p>下一站，紐西蘭！探索未知風景，收藏專屬於你的旅行回憶。</p></div>
+<div class="col-md-3"><h5>快速連結</h5><a href="attractions.html">探索城市</a><a href="products.html">旅遊商品</a><a href="itinerary.html">行程規劃</a></div>
+<div class="col-md-3"><h5>旅遊協助</h5><a href="services.html">旅遊服務</a><a href="message.html">留言板</a><a href="member.html">會員中心</a></div></div>
+<div class="footer-bottom">© KIWI TRAILS. 旅遊網站專題展示版。</div></div></footer>
+<a href="#" class="btn btn-primary border-inner py-3 fs-4 back-to-top" aria-label="回到頁面頂端"><i class="bi bi-arrow-up"></i></a>
+<script src="js/bootstrap.bundle.min.js"></script><script src="js/main.js"></script><script src="js/navbar.js"></script><script src="js/pages.js"></script></body></html>

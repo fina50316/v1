@@ -361,7 +361,7 @@ h6,
 
 
 /* 滑鼠移入：景點名稱放大 */
-.attraction-card:hover-name {
+.attraction-card:hover .attraction-name {
     transform: scale(1.08);
     transform-origin: left bottom;
 }
