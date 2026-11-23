@@ -324,3 +324,43 @@ nav.navbar .dropdown-item:focus {
     background-color: var(--bg_green);
 }
 
+
+
+/* 修正卡片外層露出綠色色塊：背景交由圖片本身呈現 */
+.attraction-list-section .attraction-item {
+  height: auto !important;
+  min-height: 0;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.attraction-list-section .attraction-card {
+  height: 220px !important;
+  min-height: 220px;
+  background: transparent !important;
+}
+
+.attraction-list-section .attraction-image {
+  height: 220px !important;
+  min-height: 220px;
+  background: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .attraction-list-section .attraction-card,
+  .attraction-list-section .attraction-image {
+    height: 190px !important;
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 576px) {
+  .attraction-list-section .attraction-card,
+  .attraction-list-section .attraction-image {
+    height: 220px !important;
+    min-height: 220px;
+  }
+}
