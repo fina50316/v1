@@ -1429,39 +1429,6 @@
     <script src="js/favorites.js"></script>
     <script src="js/home.js"></script>
 
-    <script>
-    function fastScrollTop(event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        event.stopPropagation();
-
-        const startPosition = window.scrollY;
-        const duration = 500;
-        const startTime = performance.now();
-
-        // 暫時關閉瀏覽器原本的平滑滾動
-        document.documentElement.style.scrollBehavior = "auto";
-
-        function animateScroll(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-
-            // 快速起步，平順減速
-            const ease = 1 - Math.pow(1 - progress, 3);
-
-            window.scrollTo(0, startPosition * (1 - ease));
-
-            if (progress < 1) {
-                requestAnimationFrame(animateScroll);
-            } else {
-                document.documentElement.style.scrollBehavior = "";
-            }
-        }
-
-        requestAnimationFrame(animateScroll);
-    }
-    </script>
-
 </body>
 
 </html>
