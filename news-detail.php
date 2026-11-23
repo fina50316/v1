@@ -13,13 +13,17 @@ function e($value) { return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8'
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= e($news['title']) ?>｜KIWI TRAILS</title>
-<link href="css/bootstrap.min.css" rel="stylesheet"><link href="css/style.css" rel="stylesheet"><link href="css/pages.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet"><link href="css/style.css" rel="stylesheet"><link href="css/pages.css" rel="stylesheet"><link href="css/banner.css" rel="stylesheet">
 </head>
 <body>
+<section class="page-banner">
+  <div class="container">
+    <h1 class="display-1 text-white mb-4"><?= e($news['title']) ?></h1>
+  </div>
+</section>
 <main class="page-section"><div class="container">
 <a href="news.html">← 返回最新消息</a>
-<p class="eyebrow"><?= e($news['category']) ?> · <?= e($news['published_at']) ?></p>
-<h1><?= e($news['title']) ?></h1>
+<p class="small text-muted mt-3"><?= e($news['category']) ?> · <?= e($news['published_at']) ?></p>
 <?php if (!empty($news['image'])): ?><img class="img-fluid my-4" src="<?= e($news['image']) ?>" alt=""><?php endif; ?>
 <p><?= nl2br(e($news['summary'])) ?></p>
 <article><?= nl2br(e($news['content'])) ?></article>
