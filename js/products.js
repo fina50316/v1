@@ -153,7 +153,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".add-to-cart").forEach(button => button.addEventListener("click", () => {
     const dateInput = document.getElementById("experienceDate1");
-    if (dateInput && !dateInput.value) { dateInput.reportValidity(); dateInput.focus(); return; }
+    if (dateInput && !dateInput.value) { alert("請先選擇體驗日期。"); dateInput.focus(); return; }
     let cart=[]; try { cart=JSON.parse(localStorage.getItem("kiwiCart")||"[]"); } catch {}
     cart.push({productId:Number(button.dataset.productId),name:button.dataset.name,city:button.dataset.city,category:button.dataset.category,price:Number(button.dataset.price||0),quantity:1,image:button.dataset.image,experienceDate:dateInput?.value||""});
     localStorage.setItem("kiwiCart",JSON.stringify(cart));
