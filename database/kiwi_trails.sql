@@ -100,6 +100,6 @@ CREATE TABLE IF NOT EXISTS news (
 
 -- 範例商品：可在 phpMyAdmin 依專題商品清單繼續新增
 INSERT INTO products (name, city, category, description, price, image)
-SELECT 'Shotover Jet 噴射快艇體驗', 'Queenstown', 'water-activities',
-       '皇后鎮經典噴射快艇體驗（展示商品）', 2500, 'Activity-img/shotover-jet.jpg'
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE name='Shotover Jet 噴射快艇體驗');
+SELECT '魔戒生態之旅 - 格勒諾奇半日遊', 'Queenstown', 'city-tour',
+       '探索格勒諾奇的壯麗山谷與電影取景地（展示商品）', 0, 'Activity-img/the-rings-tour.jpg'
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE name='魔戒生態之旅 - 格勒諾奇半日遊');
