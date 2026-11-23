@@ -1,0 +1,49 @@
+/* 所有內頁共用的標題橫幅：與「景點探索」頁面保持一致 */
+.attraction-banner,
+.page-banner {
+  position: relative;
+  height: 250px;
+  min-height: 250px;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background:
+    linear-gradient(
+      to right,
+      rgba(24, 54, 40, 0.50),
+      rgba(24, 54, 40, 0.08)
+    ),
+    url("../img/Scity-Queenstown.webp") center 63% no-repeat;
+  background-size: cover;
+}
+
+.attraction-banner > .container,
+.page-banner > .container {
+  width: 100%;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.attraction-banner h1,
+.page-banner h1 {
+  margin: 0 0 1.5rem;
+  color: #fff !important;
+  font-family: "Poppins", "Noto Sans TC", sans-serif;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .attraction-banner,
+  .page-banner {
+    height: 210px;
+    min-height: 210px;
+  }
+
+  .attraction-banner h1,
+  .page-banner h1 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+  }
+}
