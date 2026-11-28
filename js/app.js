@@ -32,17 +32,50 @@ let selectedDayIndex = 0;
 let editingTripId = null;
 let selectedFavoriteIds = new Set();
 let showRoute = false;
-let routeLayer = null;
-let markers = [];
 let draggedItemId = null;
+let map = null;
+let directionsService = null;
+let directionsRenderer = null;
+let markers = [];
+let mapReady = false;
 
-if (typeof L === "undefined") {
+function showMapMessage(message) {
   const mapBox = document.getElementById("map");
-  mapBox.innerHTML = '<div style="padding:24px;color:#7b5b35;font-size:13px;line-height:1.8">地圖元件載入失敗。請確認網路連線，並使用 VS Code Live Server 開啟本頁面後重新整理。</div>';
-  throw new Error("Leaflet 載入失敗：請檢查 Leaflet CDN 網路連線。");
+  if (mapBox) mapBox.innerHTML = '<div class="map-message">' + escapeHTML(message) + '</div>';
 }
-const map = L.map("map",{zoomControl:true}).setView([-43.8,170.5],5);
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
+
+function loadGoogleMaps() {
+  const key = window.GOOGLE_MAPS_API_KEY;
+  if (!key || key === "YOUR_GOOGLE_MAPS_API_KEY") {
+    showMapMessage("尚未設定 Google Maps API Key。請在 js/google-maps-config.js 填入自己的金鑰，並確認已啟用 Maps JavaScript API 與 Directions API。");
+    return;
+  }
+  window.initKiwiGoogleMap = () => {
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: -43.8, lng: 170.5 },
+      zoom: 5,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      mapTypeId: "roadmap"
+    });
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer({
+      map,
+      suppressMarkers: true,
+      polylineOptions: { strokeColor: "#347fd1", strokeWeight: 5, strokeOpacity: .88 }
+    });
+    mapReady = true;
+    renderMap();
+  };
+  const script = document.createElement("script");
+  script.src = "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(key) + "&callback=initKiwiGoogleMap&language=zh-TW&region=NZ";
+  script.async = true;
+  script.defer = true;
+  script.onerror = () => showMapMessage("Google Maps 載入失敗，請檢查 API Key、網路連線與 API 啟用狀態。");
+  document.head.appendChild(script);
+}
+
 
 function persist(){ localStorage.setItem("kiwiTrailsTrips",JSON.stringify(trips)); }
 function currentTrip(){ return trips.find(t=>t.id===currentTripId); }
@@ -77,37 +110,77 @@ function render(){
 }
 
 function renderMap(){
-  markers.forEach(m=>map.removeLayer(m)); markers=[];
-  if(routeLayer){map.removeLayer(routeLayer);routeLayer=null;}
-  const items=currentDay().items.map(i=>favorite(i.favoriteId)).filter(Boolean);
-  const points=[];
-  items.forEach((f,i)=>{
-    const icon=L.divIcon({className:"",html:`<div class="custom-marker"><span>${i+1}</span></div>`,iconSize:[29,29],iconAnchor:[14,28]});
-    const marker=L.marker([f.lat,f.lng],{icon}).bindPopup(`<strong>${i+1}. ${escapeHTML(f.name)}</strong><br>${escapeHTML(f.city)}`).addTo(map);
-    markers.push(marker); points.push([f.lat,f.lng]);
+  if (!mapReady || !map) return;
+  markers.forEach(marker => marker.setMap(null));
+  markers = [];
+  directionsRenderer.set("directions", null);
+  const items = currentDay().items.map(i => favorite(i.favoriteId)).filter(Boolean);
+  const bounds = new google.maps.LatLngBounds();
+
+  items.forEach((f, i) => {
+    const position = { lat: Number(f.lat), lng: Number(f.lng) };
+    const marker = new google.maps.Marker({
+      position,
+      map,
+      title: f.name,
+      label: { text: String(i + 1), color: "#ffffff", fontWeight: "700" },
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 15,
+        fillColor: "#4f8f4a",
+        fillOpacity: 1,
+        strokeColor: "#ffffff",
+        strokeWeight: 3
+      }
+    });
+    const info = new google.maps.InfoWindow({
+      content: '<div class="map-popup"><strong>' + escapeHTML(f.name) + '</strong><br>' + escapeHTML(f.city) + '</div>'
+    });
+    marker.addListener("click", () => info.open({ anchor: marker, map }));
+    markers.push(marker);
+    bounds.extend(position);
   });
-  if(points.length===1) map.setView(points[0],10);
-  else if(points.length>1) map.fitBounds(points,{padding:[45,45]});
-  else map.setView([-43.8,170.5],5);
-  if(showRoute && points.length>1) drawRoute(points);
-  $("routeBtn").textContent=showRoute?"✓ 隱藏行程路線":"⌁ 顯示行程路線";
-}
-async function drawRoute(points){
-  // OSRM 公開示範服務；正式網站可改用自有路線服務。
-  const coords=points.map(p=>`${p[1]},${p[0]}`).join(";");
-  try{
-    const res=await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
-    if(!res.ok) throw new Error("route service");
-    const data=await res.json();
-    if(!data.routes?.length) throw new Error("no route");
-    routeLayer=L.geoJSON(data.routes[0].geometry,{style:{color:"#347fd1",weight:5,opacity:.85}}).addTo(map);
-    map.fitBounds(routeLayer.getBounds(),{padding:[45,45]});
-  }catch(e){
-    // 路線服務暫時不可用時，以景點間直線連接作為備援。
-    routeLayer=L.polyline(points,{color:"#347fd1",weight:4,dashArray:"7 7"}).addTo(map);
-    map.fitBounds(routeLayer.getBounds(),{padding:[45,45]});
-    alert("目前無法取得道路路線，已改以景點間的示意線呈現。");
+
+  if (items.length === 1) {
+    map.setCenter(bounds.getCenter());
+    map.setZoom(11);
+  } else if (items.length > 1) {
+    map.fitBounds(bounds, 48);
+  } else {
+    map.setCenter({ lat: -43.8, lng: 170.5 });
+    map.setZoom(5);
   }
+  if (showRoute && items.length > 1) drawRoute(items);
+  $("routeBtn").textContent = showRoute ? "✓ 隱藏行程路線" : "⌁ 顯示行程路線";
+}
+function drawRoute(items) {
+  const origin = { lat: Number(items[0].lat), lng: Number(items[0].lng) };
+  const destination = { lat: Number(items[items.length - 1].lat), lng: Number(items[items.length - 1].lng) };
+  const waypoints = items.slice(1, -1).map(f => ({
+    location: { lat: Number(f.lat), lng: Number(f.lng) },
+    stopover: true
+  }));
+  directionsService.route({
+    origin,
+    destination,
+    waypoints,
+    optimizeWaypoints: false,
+    travelMode: google.maps.TravelMode.DRIVING
+  }, (result, status) => {
+    if (status === "OK") {
+      directionsRenderer.setDirections(result);
+      const bounds = new google.maps.LatLngBounds();
+      result.routes[0].legs.forEach(leg => {
+        bounds.extend(leg.start_location);
+        bounds.extend(leg.end_location);
+      });
+      map.fitBounds(bounds, 48);
+    } else {
+      showRoute = false;
+      $("routeBtn").textContent = "⌁ 顯示行程路線";
+      alert("Google Maps 暫時無法規劃這些景點之間的路線，請確認景點座標與 Directions API 設定。");
+    }
+  });
 }
 
 function openTripDialog(edit=false){
@@ -176,7 +249,7 @@ $("addDayBtn").addEventListener("click",()=>{
   trip.days.push({date:addDays(trip.days[trip.days.length-1].date,1),items:[]});selectedDayIndex=trip.days.length-1;persist();render();
 });
 $("routeBtn").addEventListener("click",()=>{showRoute=!showRoute;renderMap();});
-$("fitMapBtn").addEventListener("click",()=>{const group=L.featureGroup(markers);if(markers.length)map.fitBounds(group.getBounds().pad(.2));else map.setView([-43.8,170.5],5);});
+$("fitMapBtn").addEventListener("click",()=>{if (!mapReady) return; if (markers.length) { const bounds = new google.maps.LatLngBounds(); markers.forEach(marker => bounds.extend(marker.getPosition())); map.fitBounds(bounds, 48); } else { map.setCenter({lat:-43.8,lng:170.5}); map.setZoom(5); }});
 $("favoriteSearch").addEventListener("input",renderFavoriteChoices);
 $("favoriteCity").addEventListener("change",renderFavoriteChoices);
 [...new Set(FAVORITES.map(f=>f.city))].sort().forEach(city=>$("favoriteCity").add(new Option(city,city)));
@@ -206,5 +279,6 @@ $("attractionList").addEventListener("drop",e=>{
 });
 
 persist();render();
+loadGoogleMaps();
 
-window.addEventListener("resize", () => map.invalidateSize());
+window.addEventListener("resize", () => { if (mapReady) google.maps.event.trigger(map, "resize"); });
