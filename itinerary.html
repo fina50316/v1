@@ -10,11 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
-    />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/itinerary.css" />
   </head>
@@ -182,13 +178,13 @@
             ⛶
           </button>
         </div>
-        <div id="map"></div>
+        <div id="map" role="application" aria-label="Google 地圖行程規劃"></div>
         <div class="map-legend">
           <span><i class="legend-dot"></i> 行程景點</span
           ><span><i class="legend-line"></i> 景點路線</span>
         </div>
         <div class="map-footer">
-          <span id="mapCount">目前 0 個景點</span><span>© OpenStreetMap</span>
+          <span id="mapCount">目前 0 個景點</span><span>Google Maps</span>
         </div>
       </aside>
     </main>
@@ -281,7 +277,7 @@
     </dialog>
 
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/google-maps-config.js"></script>
     <script src="js/app.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
