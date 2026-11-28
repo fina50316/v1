@@ -364,3 +364,16 @@ nav.navbar .dropdown-item:focus {
     min-height: 220px;
   }
 }
+
+
+/* 增加景點卡片之間的留白，避免卡片視覺上過度緊密 */
+.attraction-list-section .row {
+  --bs-gutter-x: 2rem;
+  --bs-gutter-y: 2.25rem;
+}
+.attraction-list-section .attraction-item {
+  margin-bottom: .15rem;
+}
+@media (max-width: 768px) {
+  .attraction-list-section .row { --bs-gutter-x: 1.25rem; --bs-gutter-y: 1.5rem; }
+}
